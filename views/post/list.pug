@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+    h1= title
+    a(href='/post')
+        button.btn.btn-success Добавить
+
+
+    div
+        ul
+            each post in posts
+                li
+                    a <b>#{post.title}</b> <br />
+                        a #{post.body}

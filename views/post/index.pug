@@ -1,0 +1,29 @@
+extends ../layout
+
+block content
+    h1= title
+
+    form.login-form.form-horizontal(method='post', role='form')
+        input(name='_csrf', type='hidden', value=csrfToken)
+
+        div.form-group
+            label.col-sm-4 Title
+            div.col-sm-8
+                input.form-control(
+                placeholder='Title',
+                required=true,
+                name='title',
+                type='text')
+
+        div.form-group
+            label.col-sm-4 Body
+            div.col-sm-8
+                textarea.form-control(
+                placeholder='Body',
+                required=true,
+                name='body',
+                type='text')
+
+        div.form-group
+            div.col-sm-offset-4.col-sm-8
+                button.login.btn.btn-primary(type='submit') Сохранить

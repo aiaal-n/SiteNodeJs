@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  ul
+    li Comedy
+    li Thriller
+  p Make #[a(href="http://google.com") One #[span Hello]] #[strong World]
+  - var x = 5;
+  div
+    ul
+      - for (var i=1; i<=x; i++) {
+      li= i + ". Hello"
+      - }
+
+  // - var profileName = "Danny Ocean";
+  div
+    p Hi there, #{username}. How are you doing?
+
+
+  div
+    table
+      thead
+        tr: th Posts
+      tbody
+        each post, i in userPosts
+          tr
+            td
+              a(href='/admin/post/' + post.id) #{post}
