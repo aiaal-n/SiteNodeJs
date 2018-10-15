@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+    h1= title
+
+    div
+        table.table.table-striped
+            thead.thead-dark
+                tr: th Фамилия
+                    th Имя
+                    th username
+            tbody
+                each user in users
+                    tr
+                        td
+                            a #{user.lastName}
+                        td
+                            a #{user.firstName}
+                        td
+                            a #{user.username}
+
+    //div
+    //    ul
+    //        each user in users
+    //            li
+    //                a <b>#{user.username}

@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var loginRouter = require('./routes/login');
+var loginRouter = require('./routes/auth');
 var usersRouter = require('./routes/users');
 var postRouter = require('./routes/post');
 
@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use(bodyParser({ extended: true}));
 
 app.use('/', indexRouter);
-app.use('/login', loginRouter);
+app.use('/auth', loginRouter);
 app.use('/users', usersRouter);
 app.use('/post', postRouter);
 
