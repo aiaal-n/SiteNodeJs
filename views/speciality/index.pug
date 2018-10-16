@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+    h3 Специальности
+    a(href='/speciality/create')
+        button.btn.btn-success Добавить
+
+    div
+        table.table.table-striped
+            thead.thead-dark
+                tr: th Наименование
+                    th Клиника
+            tbody
+                each speciality in specialites
+                    tr
+                        td
+                            a #{speciality.name}
+                        td
+                            a #{speciality.clinic_id}

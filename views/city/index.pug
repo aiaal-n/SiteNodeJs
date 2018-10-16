@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+    h1= title
+    a(href='/clinic/create')
+        button.btn.btn-success Добавить
+
+    div
+        table.table.table-striped
+            thead.thead-dark
+                tr: th Наименование
+            tbody
+                each city in cities
+                    tr
+                        td
+                            a #{city.name}

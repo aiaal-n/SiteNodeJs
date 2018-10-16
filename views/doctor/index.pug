@@ -1,0 +1,25 @@
+extends ../layout
+
+block content
+    h1= title
+    a(href='/doctor/create')
+        button.btn.btn-success Добавить
+
+    div
+        table.table.table-striped
+            thead.thead-dark
+                tr: th ФИО
+                    th username
+                    th Клиника
+                    th Специальность
+            tbody
+                each doctor in doctors
+                    tr
+                        td
+                            a #{doctor.lastName} #{doctor.firstName} #{doctor.secondName}
+                        td
+                            a #{doctor.username}
+                        td
+                            a #{doctor.clinic_id}
+                        td
+                            a #{doctor.spec_id}

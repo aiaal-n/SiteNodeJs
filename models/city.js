@@ -6,10 +6,6 @@ const schema = new Schema({
         type: String,
         required: true
     },
-    city_id: {
-        type: String,
-        required: true
-    },
     activate: {
         type: Boolean,
         required: true,
@@ -27,4 +23,4 @@ schema.set('toJSON', {
     virtuals: true
 });
 
-module.exports = mongoose.model('Clinic', schema);
+module.exports = mongoose.model('City', schema);
