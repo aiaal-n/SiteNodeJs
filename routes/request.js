@@ -1,18 +1,18 @@
 var express = require('express');
 var router = express.Router();
-const Clinic = require('../models/clinic');
+const Request = require('../models/request');
 const City = require('../models/city');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    Clinic.find({}).populate('city_id').then(clinics => {
-        res.render('clinic/index',{clinics: clinics});
+    Request.find({}).then(requests => {
+        res.render('request/index',{requests: requests});
     })
 });
 
 router.post('/create', function(req, res, next) {
     const {name, city} = req.body;
-    Clinic.create({
+    Request.create({
         name: name,
         city_id: city
     }).then(
@@ -31,7 +31,7 @@ router.get('/create', function(req, res, next) {
 });
 
 router.get('/view', function(req, res, next) {
-    Clinic.find({'_id':req.query.id}).populate('city_id').then(clinic => {
+    Request.find({'_id':req.query.id}).populate('city_id').then(clinic => {
         res.render('clinic/view',{clinic: clinic});
     });
 });

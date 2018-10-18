@@ -1,7 +1,7 @@
 extends ../layout
 
 block content
-    h3 Добавление специальности
+    h3 Добавление услуг
 
     form.login-form.form-horizontal(method='post', role='form')
         input(name='_csrf', type='hidden', value=csrfToken)
@@ -14,15 +14,6 @@ block content
                 required=true,
                 name='name',
                 type='text')
-
-        div.form-group
-            label.col-sm-4 Клиника
-            div.col-sm-8
-                select.form-control(
-                required=true,
-                name='clinic')
-                    each clinic in clinics
-                        option(value=clinic.id) #{clinic.name}
 
         div.form-group
             div.col-sm-offset-4.col-sm-8

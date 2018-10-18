@@ -1,0 +1,44 @@
+extends ../layout
+
+block content
+    h3 #{doctor[0].lastName} #{doctor[0].firstName} #{doctor[0].secondName}
+
+    div
+        a(href='/doctor/update?id='+doctor[0].id)
+            button.btn.btn-primary Изменить
+        a(href='/doctor/delete?id='+doctor[0].id)
+            button.btn.btn-danger Удалить
+    <br>
+    div
+        table.table.table-bordered.table-sm
+            tbody
+                tr
+                    th
+                        a ФИО
+                    td
+                        a #{doctor[0].lastName} #{doctor[0].firstName} #{doctor[0].secondName}
+                tr
+                    th
+                        a Дата рождения
+                    td
+                        a #{moment(doctor[0].birthdate).format('MM.DD.YYYY')}
+                tr
+                    th
+                        a Город
+                    td
+                        a #{doctor[0].city.name}
+                tr
+                    th
+                        a Клиника
+                    td
+                        a #{doctor[0].clinic.name}
+                tr
+                    th
+                        a Специальность
+                    td
+                        a #{doctor[0].speciality.name}
+                tr
+                    th
+                        a Логин
+                    td
+                        a #{doctor[0].username}

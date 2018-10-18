@@ -9,17 +9,21 @@ block content
         table.table.table-striped
             thead.thead-dark
                 tr: th ФИО
-                    th username
                     th Клиника
                     th Специальность
+                    th Логин
+                    th
             tbody
                 each doctor in doctors
                     tr
                         td
                             a #{doctor.lastName} #{doctor.firstName} #{doctor.secondName}
                         td
+                            a #{doctor.clinic.name}
+                        td
+                            a #{doctor.speciality.name}
+                        td
                             a #{doctor.username}
                         td
-                            a #{doctor.clinic_id}
-                        td
-                            a #{doctor.spec_id}
+                            a(href='/doctor/view?id=' + doctor.id)
+                                i.fa.fa-eye

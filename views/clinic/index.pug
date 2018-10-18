@@ -1,7 +1,5 @@
 extends ../layout
-
 block content
-    h1= title
     a(href='/clinic/create')
         button.btn.btn-success Добавить
 
@@ -10,10 +8,14 @@ block content
             thead.thead-dark
                 tr: th Наименование
                     th Город
+                    th
             tbody
                 each clinic in clinics
                     tr
                         td
                             a #{clinic.name}
                         td
-                            a #{clinic.city_id}
+                            a(href='/city/view?id=' + clinic.city_id.id) #{clinic.city_id.name}
+                        td
+                            a(href='/clinic/view?id=' + clinic.id)
+                                i.fa.fa-eye

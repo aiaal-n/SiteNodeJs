@@ -2,15 +2,20 @@ extends ../layout
 
 block content
     h1= title
-    a(href='/clinic/create')
+    a(href='/city/create')
         button.btn.btn-success Добавить
 
     div
         table.table.table-striped
             thead.thead-dark
-                tr: th Наименование
+                tr
+                    th Наименование
+                    th
             tbody
                 each city in cities
                     tr
                         td
                             a #{city.name}
+                        td
+                            a(href='/city/view?id=' + city.id)
+                                i.fa.fa-eye

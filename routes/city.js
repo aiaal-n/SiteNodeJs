@@ -24,4 +24,10 @@ router.get('/create', function(req, res, next) {
     res.render('city/create');
 });
 
+router.get('/view', function(req, res, next) {
+    City.find({'_id':req.query.id}).then(city => {
+        res.render('city/view',{city: city});
+    });
+});
+
 module.exports = router;

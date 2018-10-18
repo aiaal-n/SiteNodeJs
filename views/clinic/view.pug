@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+    h3 #{clinic[0].name}
+
+    div
+        a(href='/clinic/update?id='+clinic[0].id)
+            button.btn.btn-primary Изменить
+        a(href='/clinic/delete?id='+clinic[0].id)
+            button.btn.btn-danger Удалить
+    <br>
+    div
+        table.table.table-bordered.table-sm
+            tbody
+                tr
+                    th
+                        a Наименование
+                    td
+                        a #{clinic[0].name}
+                tr
+                    th
+                        a Город
+                    td
+                        a #{clinic[0].city_id.name}

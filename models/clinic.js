@@ -7,8 +7,9 @@ const schema = new Schema({
         required: true
     },
     city_id: {
-        type: String,
-        required: true
+        type: Schema.ObjectId,
+        required: true,
+        ref: 'City'
     },
     activate: {
         type: Boolean,

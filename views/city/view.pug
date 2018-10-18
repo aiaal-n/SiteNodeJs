@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+    h3 #{city[0].name}
+
+    div
+        a(href='/doctor/update?id='+city[0].id)
+            button.btn.btn-primary Изменить
+        a(href='/doctor/delete?id='+city[0].id)
+            button.btn.btn-danger Удалить
+    <br>
+    div
+        table.table.table-bordered.table-sm
+            tbody
+                tr
+                    th
+                        a Наименование
+                    td
+                        a #{city[0].name}

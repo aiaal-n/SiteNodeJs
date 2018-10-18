@@ -71,7 +71,6 @@ router.post('/sign-in',
     function(req, res, next) {
     const {username, password} = req.body;
     User.findOne({ username: username }, function(err, user) {
-        console.log(user);
         if (err) throw err;
         console.log("user = "+username+" pass = "+password);
         // test a matching password

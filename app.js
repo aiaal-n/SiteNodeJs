@@ -14,6 +14,8 @@ var clinicRouter = require('./routes/clinic');
 var cityRouter = require('./routes/city');
 var doctorRouter = require('./routes/doctor');
 var specialityRouter = require('./routes/speciality');
+var requestRouter = require('./routes/request');
+var serviceRouter = require('./routes/service');
 
 var app = express();
 
@@ -36,6 +38,8 @@ app.use('/clinic', clinicRouter);
 app.use('/city', cityRouter);
 app.use('/doctor', doctorRouter);
 app.use('/speciality', specialityRouter);
+app.use('/request', requestRouter);
+app.use('/service', serviceRouter);
 
 database().then(info => {
   console.log(`Connected to ${info.host}:${info.port}/${info.name}`)

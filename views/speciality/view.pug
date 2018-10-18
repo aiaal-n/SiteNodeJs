@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+    h3 Специальность
+
+    div
+        a(href='/speciality/update?id='+speciality[0].id)
+            button.btn.btn-primary Изменить
+        a(href='/speciality/delete?id='+speciality[0].id)
+            button.btn.btn-danger Удалить
+        a(href='/service/create?id=' + speciality[0].id)
+            button.btn.btn-success Добавить услугу
+    <br>
+    div
+        table.table.table-bordered.table-sm
+            tbody
+                tr
+                    th
+                        a Наименование
+                    td
+                        a #{speciality[0].name}
+                tr
+                    th
+                        a Клиника
+                    td
+                        a #{speciality[0].clinic_id.name}
