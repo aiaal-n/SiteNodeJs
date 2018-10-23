@@ -32,4 +32,8 @@ router.get('/view', function(req, res, next) {
     });
 });
 
+router.get('/delete', function (req, res, next) {
+    Service.findByIdAndRemove(req.query.id).then(res.redirect('/doctor'))
+});
+
 module.exports = router;

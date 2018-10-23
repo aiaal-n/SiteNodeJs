@@ -2,24 +2,11 @@ var express = require('express');
 var router = express.Router();
 const Speciality = require('../models/speciality');
 const Clinic = require('../models/clinic');
-const promise = require('promise');
+const Service = require('../models/service');
 
 /* GET home page. */
 router.get('/', async function (req, res, next) {
     const specialites = await Speciality.find({}).populate('clinic_id');
-
-    // const spec = await new Promise((resolve, reject) => {
-    //     for (let i = 0; i < specialites.length; i++) {
-    //         Clinic.find({'_id': specialites[i].clinic_id.toString()}).populate(clinic => {
-    //             console.log(clinic[0].name);
-    //             specialites[i].clinic_id = clinic[0].name;
-    //             console.log(specialites[i].clinic_id)
-    //         });
-    //     }
-    //     resolve(specialites)
-    // });
-    console.log(specialites)
-    console.log("ya")
     res.render('speciality/index', {specialites: specialites});
 });
 
@@ -43,10 +30,18 @@ router.get('/create', function(req, res, next) {
     });
 });
 
-router.get('/view', function(req, res, next) {
-    Speciality.find({'_id':req.query.id}).populate('clinic_id').then(speciality => {
-        res.render('speciality/view',{speciality: speciality});
-    });
+router.get('/view', async function (req, res, next) {
+    const [speciality, services] = await (Promise.all([
+        Speciality.find({'_id': req.query.id}).populate('clinic_id'),
+        Service.find({'speciality': req.query.id}),
+    ]));
+
+    if (speciality != null && services != null)
+        res.render('speciality/view', {speciality: speciality, services: services});
+});
+
+router.get('/delete', function (req, res, next) {
+    Speciality.findByIdAndRemove(req.query.id).then(res.redirect('/speciality'))
 });
 
 module.exports = router;

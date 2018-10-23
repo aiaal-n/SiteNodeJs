@@ -84,4 +84,8 @@ router.get('/ajax-clinic', function(req, res, next) {
     });
 });
 
+router.get('/delete', function (req, res, next) {
+    Doctor.findByIdAndRemove(req.query.id).then(res.redirect('/doctor'))
+});
+
 module.exports = router;

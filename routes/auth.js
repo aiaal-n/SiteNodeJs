@@ -4,13 +4,13 @@ const User = require('../models/user');
 const session = require('express-session');
 const LocalStrategy = require('passport-local').Strategy;
 const passport = require('passport');
-var sess;
+const jwt = require('jsonwebtoken');
 
-/* GET home page. */
+/* GET Регистрация */
 router.get('/sign-up', function(req, res, next) {
     res.render('auth/sign-up');
 });
-
+/* POST Регистрация */
 router.post('/sign-up', function(req, res, next) {
     const {lastName, firstName, secondName, username, email, password} = req.body;
     var regexp = /^[a-z_\-\.]+$/i;
@@ -69,38 +69,54 @@ router.get('/sign-in', function(req, res, next) {
 
 router.post('/sign-in',
     function(req, res, next) {
-    const {username, password} = req.body;
-    User.findOne({ username: username }, function(err, user) {
-        if (err) throw err;
-        console.log("user = "+username+" pass = "+password);
-        // test a matching password
-        if(user != null) {
-            user.comparePassword(password, function (err, isMatch) {
-                if (err) throw err;
-                console.log('Password:', isMatch); // -&gt; Password123: true
-                if (isMatch) {
-                    sess = req.session;
-                    sess.username = username;
-                    res.end('done');
-                    res.redirect('/');
-                    // req.login(user, function(err) {
-                    //     if (err) { return next(err); }
-                    //     return res.redirect('/users/' + req.user.username);
-                    // });
-                } else {
-                    res.render('auth/sign-in', {failureFlash: 'Не правильно ввели пароль'});
-                }
+    console.log(req.body)
+    // const {username, password} = req.body;
+    // User.findOne({ username: username }, function(err, user) {
+    //     if (err) throw err;
+    //     console.log("user = "+username+" pass = "+password);
+    //     // test a matching password
+    //     if(user != null) {
+    //         user.comparePassword(password, function (err, isMatch) {
+    //             if (err) throw err;
+    //             console.log('Password:', isMatch); // -&gt; Password123: true
+    //             if (isMatch) {
+    //                 sess = req.session;
+    //                 sess.username = username;
+    //                 res.end('done');
+    //                 res.redirect('/');
+    //                 // req.login(user, function(err) {
+    //                 //     if (err) { return next(err); }
+    //                 //     return res.redirect('/users/' + req.user.username);
+    //                 // });
+    //             } else {
+    //                 res.render('auth/sign-in', {failureFlash: 'Не правильно ввели пароль'});
+    //             }
+    //         });
+    //     } else {
+    //         res.render('auth/sign-in', {failureFlash: 'Не правильно ввели логин'});
+    //     }
+    // });
+    passport.authenticate('local', {session: false}, (err, user, info) => {
+        console.log(user);
+        if (err || !user) {
+            return res.status(400).json({
+                message: 'Something is not right',
+                user   : user
             });
-        } else {
-            res.render('auth/sign-in', {failureFlash: 'Не правильно ввели логин'});
         }
-    });
 
-    // passport.authenticate('local', { failureRedirect: '/error' }),
-    //     function(req, res) {
-    //         res.redirect('/success?username='+req.user.username);
-    //     });
-});
+        req.login(user, {session: false}, (err) => {
+            if (err) {
+                res.send(err);
+            }
+
+            // generate a signed son web token with the contents of user object and return it in the response
+
+            const token = jwt.sign(user, 'your_jwt_secret');
+            return res.json({user, token});
+        });
+    })(req, res)}
+);
 
 router.get('/logout', function(req, res){
     req.logout();

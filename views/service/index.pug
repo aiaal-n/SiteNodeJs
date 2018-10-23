@@ -7,15 +7,12 @@ block content
         table.table.table-striped
             thead.thead-dark
                 tr: th Наименование
-                    th Город
                     th
             tbody
-                each clinic in requests
+                each service in services
                     tr
                         td
-                            a #{clinic.name}
+                            a #{service.name}
                         td
-                            a(href='/city/view?id=' + clinic.city_id.id) #{clinic.city_id.name}
-                        td
-                            a(href='/clinic/view?id=' + clinic.id)
+                            a(href='/clinic/view?id=' + service.id)
                                 i.fa.fa-eye

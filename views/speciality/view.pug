@@ -24,3 +24,13 @@ block content
                         a Клиника
                     td
                         a #{speciality[0].clinic_id.name}
+
+    div
+        table.table.table-striped.table-sm
+            thead.thead-dark
+                tr: th Наименование
+            tbody
+                each service in services
+                    tr
+                        td
+                            a #{service.name}
